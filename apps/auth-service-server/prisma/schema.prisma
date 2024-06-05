@@ -1,0 +1,50 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model Log {
+  appUser   AppUser?  @relation(fields: [appUserId], references: [id])
+  appUserId String?   @db.ObjectId
+  createdAt DateTime  @default(now())
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  message   String?
+  timestamp DateTime?
+  updatedAt DateTime  @updatedAt
+}
+
+model Role {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String?
+  updatedAt   DateTime @updatedAt
+}
+
+model AppUser {
+  createdAt DateTime @default(now())
+  email     String?
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  isActive  Boolean?
+  logs      Log[]
+  password  String?
+  token     String?
+  updatedAt DateTime @updatedAt
+  username  String?
+}
