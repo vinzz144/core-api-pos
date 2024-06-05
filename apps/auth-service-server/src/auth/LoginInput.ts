@@ -3,23 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 
 @ArgsType()
-class RegisterInput {
-    @Field(() => String)
-    @ApiProperty({
-        required: true,
-        type: () => String
-    })
-    @Type(() => String)
-    username!: string;
-
-    @Field(() => String)
-    @ApiProperty({
-        required: true,
-        type: () => String
-    })
-    @Type(() => String)
-    password!: string;
-
+class LoginInput {
     @Field(() => String)
     @ApiProperty({
         required: true,
@@ -28,15 +12,13 @@ class RegisterInput {
     @Type(() => String)
     email!: string;
 
-    @Field(() => Boolean, {
-        nullable: true
-    })
+    @Field(() => String)
     @ApiProperty({
-        required: false,
-        type: () => Boolean
+        required: true,
+        type: () => String
     })
-    @Type(() => Boolean)
-    isActive?: boolean;
+    @Type(() => String)
+    password!: string;
 }
 
-export { RegisterInput as RegisterInput };
+export { LoginInput as LoginInput };

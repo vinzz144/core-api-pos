@@ -1,7 +1,8 @@
-import { Field } from "@nestjs/graphql";
+import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 
+@ObjectType("RegisterOutputObject")
 class RegisterOutput {
     @Field(() => String)
     @ApiProperty({
